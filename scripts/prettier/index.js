@@ -8,7 +8,6 @@
 
 // Based on similar script in Jest
 // https://github.com/facebook/jest/blob/a7acc5ae519613647ff2c253dd21933d6f94b47f/scripts/prettier.js
-
 const chalk = require('chalk');
 const glob = require('glob');
 const prettier = require('prettier');
@@ -17,8 +16,8 @@ const listChangedFiles = require('../shared/listChangedFiles');
 const prettierConfigPath = require.resolve('../../.prettierrc');
 
 const mode = process.argv[2] || 'check';
-const shouldWrite = mode === 'write' || mode === 'write-changed';
-const onlyChanged = mode === 'check-changed' || mode === 'write-changed';
+const shouldWrite = mode.includes('write');
+const onlyChanged = mode.includes('changed');
 
 const changedFiles = onlyChanged ? listChangedFiles() : null;
 let didWarn = false;
